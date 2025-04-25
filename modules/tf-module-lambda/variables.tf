@@ -17,7 +17,11 @@ variable "event_source_arn" {
   type        = string
 }
 variable "dynamodb_table_arn" {
-  description = "Dynamodb table where you want your lambda to write data"
+  description = "Dynamodb table ARN"
+  type        = string
+}
+variable "dynamodb_table_name" {
+  description = "Dynamodb table name"
   type        = string
 }
 variable "sqs_queue_arn" {

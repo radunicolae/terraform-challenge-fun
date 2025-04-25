@@ -96,8 +96,9 @@ resource "aws_lambda_function" "lambda_function" {
   }
   environment {
     variables = {
-      ENV_NAME  = var.env_name
-      ENV_OWNER = var.env_owner
+      DYNAMODB_TABLE = var.dynamodb_table_name
+      ENV_NAME       = var.env_name
+      ENV_OWNER      = var.env_owner
     }
   }
 
