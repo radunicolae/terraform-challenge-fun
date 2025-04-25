@@ -8,8 +8,12 @@ terraform {
   }
 }
 
+provider "aws" {
+  region = "us-east-1"
+}
+
 module "infra" {
-  source = "../../infra"
+  source = "../../../infra"
 
   env_name  = var.env_name
   env_owner = var.env_owner
