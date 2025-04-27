@@ -1,12 +1,12 @@
-terraform {
-  backend "s3" {
-    bucket       = "radunicolae-s3-state"
-    key          = "prod/mars/terraform.tfstate"
-    region       = "us-east-1"
-    encrypt      = true
-    use_lockfile = true
-  }
-}
+# terraform {
+#   backend "s3" {
+#     bucket       = "radunicolae-s3-state"
+#     key          = "prod/mars/terraform.tfstate"
+#     region       = "us-east-1"
+#     encrypt      = true
+#     use_lockfile = true
+#   }
+# }
 
 provider "aws" {
   region = "us-east-1"
