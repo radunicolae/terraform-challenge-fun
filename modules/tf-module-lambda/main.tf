@@ -63,10 +63,12 @@ resource "aws_iam_role" "lambda_iam_role" {
   tags               = local.common_tags
 }
 
+## AWS Managed Police AWSLambdaBasicExecutionRole (Cloudwatch)
 resource "aws_iam_role_policy_attachment" "lambda_cw_policy" {
   role       = aws_iam_role.lambda_iam_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+## AWS Managed Police AWSXRayDaemonWriteAccess
 resource "aws_iam_role_policy_attachment" "lambda_xray_policy" {
   role       = aws_iam_role.lambda_iam_role.name
   policy_arn = "arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess"
@@ -82,7 +84,7 @@ resource "aws_iam_role_policy" "lambda_sqs_policy" {
   policy = data.aws_iam_policy_document.lambda_sqs_policy_document.json
 }
 
-## Lambda
+## Lambda Function
 resource "aws_lambda_function" "lambda_function" {
   function_name    = "tf-${local.service_name}-${var.env_name}-${var.env_owner}"
   role             = aws_iam_role.lambda_iam_role.arn
@@ -105,15 +107,15 @@ resource "aws_lambda_function" "lambda_function" {
   tags = local.common_tags
 }
 
-resource "aws_lambda_event_source_mapping" "lambda_trigger" {
+resource "aws_lambda_event_source_mapping" "lambda_sqs_trigger" {
   event_source_arn = var.event_source_arn
   function_name    = aws_lambda_function.lambda_function.arn
 
   tags = local.common_tags
 }
 
-## Cloudwatch
-resource "aws_cloudwatch_log_group" "lambda_logs" {
+## Cloudwatch Log Group
+resource "aws_cloudwatch_log_group" "lambda_log_group" {
   name              = "/aws/lambda/${aws_lambda_function.lambda_function.function_name}"
   retention_in_days = var.retention_in_days
 

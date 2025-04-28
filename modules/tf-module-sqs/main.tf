@@ -15,11 +15,11 @@ data "aws_iam_policy_document" "sqs_queue_policy_document" {
     sid    = "SQSPerms"
     effect = "Allow"
     actions = [
-      "SQS:SetQueueAttributes",
-      "SQS:ReceiveMessage",
-      "SQS:GetQueueUrl",
-      "SQS:GetQueueAttributes",
-      "SQS:DeleteMessage"
+      "sqs:SetQueueAttributes",
+      "sqs:ReceiveMessage",
+      "sqs:GetQueueUrl",
+      "sqs:GetQueueAttributes",
+      "sqs:DeleteMessage"
     ]
 
     principals {
