@@ -30,5 +30,6 @@ resource "aws_dynamodb_table" "dynamodb_table" {
     name = "userId"
     type = "S"
   }
+
   tags = local.common_tags
 }
